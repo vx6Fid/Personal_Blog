@@ -10,7 +10,7 @@ const handleError = (res, error, context) => {
 exports.getBlogs = async (req, res) => {
   try {
     const { rows } = await pool.query(
-      "SELECT id, title, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC"
+      "SELECT id, title, content, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC"
     );
     res.json({
       message: "Blogs fetched successfully",

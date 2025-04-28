@@ -10,8 +10,8 @@ router.post('/login', adminController.login);
 router.get('/data', adminController.getAdminData);
 
 // About Me
-router.put('/about/mobile', authMiddleware, adminController.updateAboutM);
-router.put('/about/desktop', authMiddleware, adminController.updateAboutD);
+router.put('/about_mobile', authMiddleware, adminController.updateAboutM);
+router.put('/about_desktop', authMiddleware, adminController.updateAboutD);
 
 // Doing
 router.put('/doing', authMiddleware, adminController.updateDoing);

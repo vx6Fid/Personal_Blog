@@ -13,4 +13,17 @@ pool.on("connect", () => {
   console.log("🟢 Connected to PostgreSQL");
 });
 
+// Ping the database to check if it's alive
+const pingDatabase = async () => {
+  try {
+    const client = await pool.connect();
+    await client.query("SELECT NOW()");
+    client.release();
+    console.log("🟢 Database is alive");
+  } catch (error) {
+    console.error("🔴 Database is not responding", error);
+  }
+};
+pingDatabase();
+
 module.exports = pool;
