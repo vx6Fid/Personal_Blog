@@ -281,7 +281,7 @@ export default function BlogPage() {
         {/* Table of Contents Sidebar */}
         <aside className="hidden lg:block fixed right-0 top-0 h-full w-80 xl:w-96 border-l border-borders/30 pb-6 pr-6 pl-8 pt-24 overflow-y-auto bg-background/80 backdrop-blur-sm">
           {/* Header section - sticky at top */}
-          <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm pb-4 pt-4">
+          <div className="top-0 z-10 bg-background/80 backdrop-blur-sm pb-4 pt-4">
             <Image
               src="/ninja_reading.png"
               alt="Reading Ninja"

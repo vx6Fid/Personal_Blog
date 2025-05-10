@@ -44,8 +44,8 @@ function BlogCards({ blog, id }) {
         href={`/blogs/${blog.slug}`}
         className="inline-flex items-center text-accent text-sm font-mono hover:underline"
       >
-        cat {blog.slug}.md
-        <span className="ml-1 animate-pulse">_</span>
+        {"Read more "}
+        <span className="ml-1 animate-pulse">|</span>
       </Link>
     </article>
   );
