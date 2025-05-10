@@ -2,6 +2,7 @@ import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={roboto_mono.className}>
       <body className="min-h-screen flex flex-col">
+        <Toaster position="top-right"/>
         <Navbar />
         <main className="flex-grow pt-16">{children}</main>
         <Footer />
