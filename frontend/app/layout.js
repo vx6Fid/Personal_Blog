@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
@@ -21,6 +23,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={roboto_mono.className}>
       <body className="min-h-screen flex flex-col">
         <Toaster position="top-right"/>
+        <Analytics />
+        <SpeedInsights />
         <Navbar />
         <main className="flex-grow pt-16">{children}</main>
         <Footer />
