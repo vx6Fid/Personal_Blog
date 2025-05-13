@@ -1,6 +1,8 @@
 "use client";
 import ProjectCard from "@/components/ProjectCard";
+import Head from "next/head";
 import { useEffect, useState } from "react";
+
 
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
