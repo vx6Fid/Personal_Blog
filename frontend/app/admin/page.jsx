@@ -279,7 +279,7 @@ function AdminPanel() {
                         <div>
                           <h3 className="font-medium text-lg">{blog.title}</h3>
                           <p className="text-secondary text-sm mt-1">
-                            {new Date(blog.created_at).toLocaleDateString()} • {blog.read_time || '5 min'} read
+                            {new Date(blog.created_at).toLocaleDateString()} • {blog.read_time || '5'} {" min read"}
                           </p>
                         </div>
                         <div className="flex gap-2">

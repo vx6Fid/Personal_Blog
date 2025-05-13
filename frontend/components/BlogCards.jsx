@@ -42,10 +42,23 @@ function BlogCards({ blog, id }) {
 
       <Link
         href={`/blogs/${blog.slug}`}
-        className="inline-flex items-center text-accent text-sm font-mono hover:underline"
+        className="group inline-flex items-center text-accent text-sm font-mono relative overflow-hidden"
       >
-        {"Read more "}
-        <span className="ml-1 animate-pulse">|</span>
+        <span className="relative inline-block">
+          {"Read more"}
+          {/* Underline animation */}
+          <span className="absolute left-0 bottom-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full"></span>
+        </span>
+
+        {/* Animated arrow with three states */}
+        <span className="ml-2 relative inline-block w-4 h-4 overflow-hidden">
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center transition-all duration-500 group-hover:translate-x-[150%]">
+            |
+          </span>
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-[-150%] group-hover:translate-x-0 transition-all duration-500 flex items-center">
+            →
+          </span>
+        </span>
       </Link>
     </article>
   );

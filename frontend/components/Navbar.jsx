@@ -49,7 +49,7 @@ function Navbar() {
             className="text-accent text-xl font-bold hover:opacity-80 transition-opacity"
             aria-label="Home"
           >
-            vxF6id
+            vx6Fid
           </Link>
 
           {/* Desktop Navigation */}

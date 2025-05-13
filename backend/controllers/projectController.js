@@ -77,7 +77,7 @@ exports.createProject = async (req, res) => {
       [
         name, description, created_at,
         github_link, live_link, article_link,
-        tags, tech_stack, is_featured, image_url
+        tags, JSON.stringify(tech_stack), is_featured, image_url
       ]
     );
 

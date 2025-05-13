@@ -76,8 +76,7 @@ exports.createBlog = async (req, res) => {
 // Update blog
 exports.updateBlog = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { title, slug, tags, content, is_featured } = req.body;
+    const { id, title, slug, tags, content, is_featured, read_time } = req.body;
 
     // Basic validation
     if (!id) {
@@ -121,6 +120,7 @@ exports.updateBlog = async (req, res) => {
       slug: slug || existingBlog[0].slug,
       tags: tags || existingBlog[0].tags,
       content: content || existingBlog[0].content,
+      read_time: read_time || existingBlog[0].read_time,
       is_featured:
         is_featured !== undefined ? is_featured : existingBlog[0].is_featured,
     };
@@ -132,8 +132,9 @@ exports.updateBlog = async (req, res) => {
         tags = $3,
         content = $4,
         is_featured = $5,
+        read_time = $6,
         updated_at = NOW()
-      WHERE id = $6
+      WHERE id = $7
       RETURNING *`,
       [
         updatedData.title,
@@ -141,6 +142,7 @@ exports.updateBlog = async (req, res) => {
         updatedData.tags,
         updatedData.content,
         updatedData.is_featured,
+        updatedData.read_time,
         id,
       ]
     );
