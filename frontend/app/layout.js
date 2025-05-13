@@ -9,15 +9,19 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
-  weights: ["200", "400", "500", "700"],
+  weight: ["200", "400", "500", "700"],
   variable: "--font-roboto-mono",
 });
 
 export const metadata = {
-  title: "vx6Fid",
+  title: "vx6Fid’s Thoughts — A Blog on Systems & Beyond",
   description:
-    "Writing about backend engineering, Linux, and systems thinking. Real-world lessons, code breakdowns, and learning in public.",
+    "Reflections on code, systems, and everything in between. Exploring the world of backend engineering, tech tools, and my learning journey through diverse topics.",
+  alternates: {
+    canonical: "https://vx6fid.vercel.app", 
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (

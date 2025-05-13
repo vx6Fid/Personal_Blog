@@ -178,18 +178,43 @@ export default function BlogPage() {
     );
   }
 
+  const fullUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/${slug}`;
+  const imageUrl = blog.cover_image || `${process.env.NEXT_PUBLIC_API_BASE_URL}/default-image.png`;
+
   if (!blog) return null;
 
   return (
     <>
       <Head>
-        <title>{blog.title} | Your Blog</title>
-
+        <title>{`${blog.title} | Blog`}</title>
         <meta
           name="description"
           content={blog.content.substring(0, 160) + "..."}
         />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={`${blog.title} | Blog`} />
+        <meta
+          property="og:description"
+          content={blog.content.substring(0, 160) + "..."}
+        />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:url" content={fullUrl} />
+        <meta property="og:type" content="article" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${blog.title} | Blog`} />
+        <meta
+          name="twitter:description"
+          content={blog.content.substring(0, 160) + "..."}
+        />
+        <meta name="twitter:image" content={imageUrl} />
+
+        {/* Canonical */}
+        <link rel="canonical" href={fullUrl} />
       </Head>
+
       {/* Mobile TOC Toggle Button */}
       <button
         onClick={() => setShowMobileTOC(!showMobileTOC)}

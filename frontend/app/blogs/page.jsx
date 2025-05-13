@@ -53,6 +53,17 @@ export default function BlogPage() {
     setFilteredBlogs(filtered);
   }, [searchQuery, blogs]);
 
+  useEffect(() => {
+    const totalBlogs = filteredBlogs.length;
+    document.title = `Blog | vx6Fid (${totalBlogs} Posts)`;
+    document
+      .querySelector('meta[name="description"]')
+      .setAttribute(
+        "content",
+        `Explore the latest blogs about backend engineering, Linux, and more. (${totalBlogs} posts available)`
+      );
+  }, [filteredBlogs]);
+
   const featuredBlog = blogs.find((blog) => blog.is_featured);
   const regularBlogs = filteredBlogs.filter(
     (blog) => !blog.is_featured || blog.id === featuredBlog?.id
@@ -102,10 +113,7 @@ export default function BlogPage() {
         ) : filteredBlogs.length > 0 ? (
           <div className="space-y-8">
             {regularBlogs.map((blog) => (
-              <div
-                key={blog.id}
-                className="pb-8"
-              >
+              <div key={blog.id} className="pb-8">
                 <BlogCards blog={blog} />
               </div>
             ))}

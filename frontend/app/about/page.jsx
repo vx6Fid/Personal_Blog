@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import Head from "next/head";
 
 function Page() {
   const [about, setAbout] = useState(null);
@@ -49,92 +49,118 @@ function Page() {
   }
 
   return (
-    <div className="px-4 sm:px-8 max-w-3xl mx-auto py-12">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <h1 className="text-2xl text-accent font-medium">About</h1>
-      </div>
+    <>
+      <Head>
+        <title>About vx6Fid — Backend Engineering & Personal Projects</title>
+        <meta
+          name="description"
+          content="Learn more about vx6Fid: Exploring systems engineering, Linux, developer tools, and the journey behind tech projects."
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="About vx6Fid — Backend Engineering & Personal Projects"
+        />
+        <meta
+          property="og:description"
+          content="Learn more about vx6Fid: Exploring systems engineering, Linux, developer tools, and the journey behind tech projects."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vx6fid.vercel.app/about" />
+        <meta
+          property="og:image"
+          content="https://dummyimage.com/1200x630/000/fff&text=vx6Fid%20Blog%20-%20Exploring%20Systems%20and%20Beyond"
+        />
 
-      {/* About Text */}
-      <section className="mb-10">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-1">
-            <p className="leading-relaxed">
-              {(isMobile ? about.about_mobile : about.about_desktop)
-                .split("\n\n")
-                .filter((paragraph) => paragraph.trim()) // Remove empty paragraphs
-                .map((paragraph, index) => (
-                  <span key={index} className="leading-relaxed">
-                    {paragraph}
-                    <br />
-                    <br />
-                  </span>
+        <link rel="canonical" href="https://vx6fid.vercel.app/about" />
+      </Head>
+      <div className="px-4 sm:px-8 max-w-3xl mx-auto py-12">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-6">
+          <h1 className="text-2xl text-accent font-medium">About</h1>
+        </div>
+
+        {/* About Text */}
+        <section className="mb-10">
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="flex-1">
+              <p className="leading-relaxed">
+                {(isMobile ? about.about_mobile : about.about_desktop)
+                  .split("\n\n")
+                  .filter((paragraph) => paragraph.trim()) // Remove empty paragraphs
+                  .map((paragraph, index) => (
+                    <span key={index} className="leading-relaxed">
+                      {paragraph}
+                      <br />
+                      <br />
+                    </span>
+                  ))}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Current Status */}
+        <section className="mb-16">
+          <h2 className="text-xl text-accent font-medium">What I'm Doing</h2>
+          <p className="text-xs mb-4 text-secondary mt-2">
+            Updated: {new Date(about.doing_date).toLocaleDateString()}
+          </p>
+          <ul className="space-y-2">
+            {about.doing_content.map((item, index) => (
+              <li key={index}>• {item}</li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Tools */}
+        <section className="mb-16">
+          <h2 className="text-xl text-accent font-medium mb-4">Tools</h2>
+
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-lg text-accent mb-3">Software</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(about.software_tools).map(([key, value]) => (
+                  <div key={key} className="text-secondary">
+                    <span>{key}: </span>
+                    <span className="text-primary">{value}</span>
+                  </div>
                 ))}
-            </p>
-          </div>
-        </div>
-      </section>
+              </div>
+            </div>
 
-      {/* Current Status */}
-      <section className="mb-16">
-        <h2 className="text-xl text-accent font-medium">What I'm Doing</h2>
-        <p className="text-xs mb-4 text-secondary mt-2">
-          Updated: {new Date(about.doing_date).toLocaleDateString()}
-        </p>
-        <ul className="space-y-2">
-          {about.doing_content.map((item, index) => (
-            <li key={index}>• {item}</li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Tools */}
-      <section className="mb-16">
-        <h2 className="text-xl text-accent font-medium mb-4">Tools</h2>
-
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-lg text-accent mb-3">Software</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {Object.entries(about.software_tools).map(([key, value]) => (
-                <div key={key} className="text-secondary">
-                  <span>{key}: </span>
-                  <span className="text-primary">{value}</span>
-                </div>
-              ))}
+            <div>
+              <h3 className="text-lg text-accent mb-3">Hardware</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(about.hardware_tools).map(([key, value]) => (
+                  <div key={key} className="text-secondary">
+                    <span>{key}: </span>
+                    <span className="text-primary whitespace-pre-line">
+                      {value}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </section>
 
-          <div>
-            <h3 className="text-lg text-accent mb-3">Hardware</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {Object.entries(about.hardware_tools).map(([key, value]) => (
-                <div key={key} className="text-secondary">
-                  <span>{key}: </span>
-                  <span className="text-primary whitespace-pre-line">
-                    {value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Extras */}
-      <section className="mb-6">
-        <h2 className="text-xl font-medium text-accent mb-4">Beyond</h2>
-        <p>{about.extras}</p>
-        <br />
-        <p>
-          This site is a reflection of that journey — from configuring my first
-          Linux window manager to architecting systems in Go.
+        {/* Extras */}
+        <section className="mb-6">
+          <h2 className="text-xl font-medium text-accent mb-4">Beyond</h2>
+          <p>{about.extras}</p>
           <br />
-          <br />
-          Let’s see where it leads next.
-        </p>
-      </section>
-    </div>
+          <p>
+            This site is a reflection of that journey — from configuring my
+            first Linux window manager to architecting systems in Go.
+            <br />
+            <br />
+            Let’s see where it leads next.
+          </p>
+        </section>
+      </div>
+    </>
   );
 }
 
