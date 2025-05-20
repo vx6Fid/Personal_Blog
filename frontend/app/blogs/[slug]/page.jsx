@@ -179,7 +179,9 @@ export default function BlogPage() {
   }
 
   const fullUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/${slug}`;
-  const imageUrl = blog.cover_image || `${process.env.NEXT_PUBLIC_API_BASE_URL}/default-image.png`;
+  const imageUrl =
+    blog.cover_image ||
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/default-image.png`;
 
   if (!blog) return null;
 
@@ -191,6 +193,8 @@ export default function BlogPage() {
           name="description"
           content={blog.content.substring(0, 160) + "..."}
         />
+
+        <link rel="icon" href="/favicon.ico" />
 
         {/* Open Graph */}
         <meta property="og:title" content={`${blog.title} | Blog`} />
@@ -503,7 +507,7 @@ export default function BlogPage() {
                   p: ({ node, ...props }) => (
                     <div
                       {...props}
-                      className="my-6 leading-relaxed text-secondary/90"
+                      className="my-6 leading-relaxed text-primary"
                     />
                   ),
                   blockquote: ({ node, ...props }) => (
