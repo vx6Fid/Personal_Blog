@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Mail, Linkedin, Instagram, Twitter, Github } from "lucide-react";
+import {
+  Send,
+  Mail,
+  Linkedin,
+  Instagram,
+  Twitter,
+  Github,
+  Coffee,
+} from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -76,20 +84,20 @@ export default function ContactPage() {
               tiwariachal059@gmail.com
             </a>
             <a
+              href="https://buymeacoffee.com/vx6fid"
+              target="blank"
+              className="flex items-center gap-3 text-secondary hover:text-accent transition-colors"
+            >
+              <Coffee className="w-4 h-4" />
+              Keep Me Caffeinated
+            </a>
+            <a
               href="https://www.linkedin.com/in/achaltiwari/"
               target="blank"
               className="flex items-center gap-3 text-secondary hover:text-accent transition-colors"
             >
               <Linkedin className="w-4 h-4" />
               LinkedIn
-            </a>
-            <a
-              href="https://www.instagram.com/vx6fid"
-              target="blank"
-              className="flex items-center gap-3 text-secondary hover:text-accent transition-colors"
-            >
-              <Instagram className="w-4 h-4" />
-              Instagram
             </a>
             <a
               href="https://x.com/vx6Fid"

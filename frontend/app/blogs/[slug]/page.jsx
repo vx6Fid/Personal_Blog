@@ -520,6 +520,23 @@ export default function BlogPage() {
               />
             </div>
 
+            {/* Support Me Section */}
+            <div className="mt-8 mb-6 max-w-xl mx-auto px-4 text-primary">
+              <p className="mb-2">
+                {">"} If you’re running on the same OS as me (curiosity.exe), feel
+                free to{" "}
+                <a
+                  href="https://buymeacoffee.com/vx6fid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex gap-2 px-3 py-1 text-primary rounded hover:text-accent transition-colors font-semibold"
+                >
+                  Buy Me a Coffee ☕
+                </a>{" "}
+                and keep the good processes alive!
+              </p>
+            </div>
+
             {/* Article Footer */}
             <footer className="mt-16 pt-8 border-t border-borders/30">
               <div className="flex justify-between items-center">

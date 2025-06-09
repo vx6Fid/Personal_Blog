@@ -36,7 +36,7 @@ function Navbar() {
   return (
     <motion.nav 
       className={`fixed w-full z-50 border-b transition-colors ${
-        scrolled ? 'bg-background/90 backdrop-blur-sm' : 'bg-background'
+        scrolled ? 'bg-background backdrop-blur-sm' : 'bg-background'
       } border-borders`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

@@ -20,7 +20,7 @@ function HeroSection() {
       {/* Name / Username */}
       <div className="mt-6">
         <p className="text-xl sm:text-2xl text-accent font-bold mt-1">
-          vxF6id
+          vx6Fid
         </p>
       </div>
 

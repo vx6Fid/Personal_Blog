@@ -63,11 +63,66 @@ function ProjectsPage() {
           </button>
         </div>
       ) : projects.length > 0 ? (
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <>
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+
+          {/* Terminal-style typing animation endline */}
+          <p className="mt-8 text-accent font-mono text-md flex gap-2 items-center">
+            <span>➜</span>
+            <span className="typing">Projects loaded</span>
+          </p>
+
+          {/* CSS for looping typing and blinking cursor */}
+          <style jsx>{`
+            .typing {
+              overflow: hidden;
+              white-space: nowrap;
+              border-right: 0.15em solid transparent;
+              animation: typing 14s steps(16, end) infinite,
+                blinkTextCursor 1.5s step-end infinite;
+              width: 0;
+              display: inline-block;
+            }
+            .blinking-cursor {
+              animation: blink 1s step-start infinite;
+              font-weight: 400;
+            }
+            @keyframes typing {
+              0% {
+                width: 0;
+              }
+              30% {
+                width: 16ch;
+              }
+              70% {
+                width: 16ch;
+              }
+              100% {
+                width: 0;
+              }
+            }
+            @keyframes blinkTextCursor {
+              0%,
+              50%,
+              100% {
+                border-color: transparent;
+              }
+              25%,
+              75% {
+                border-color: currentColor;
+              }
+            }
+            @keyframes blink {
+              50% {
+                opacity: 0;
+              }
+            }
+          `}</style>
+        </>
       ) : (
         <div className="p-8 text-center text-secondary">
           <p>No projects found</p>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[vx6fid's Blog]]></title>
+        <description><![CDATA[Where systems break, code laughs, and caffeine fuels the chaos.]]></description>
+        <link>http://github.com/dylang/node-rss</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Mon, 09 Jun 2025 13:02:11 GMT</lastBuildDate>
+        <author><![CDATA[Achal]]></author>
+        <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Understanding the Backend Behind LLMs(No Headaches Involved)]]></title>
+            <description><![CDATA[After reading this blog post, any fears you have about LLMs will be put to rest. All you need is a curious mind and a bit of focus—no advanced knowledge of machine learning or AI is required! In this article, we’ll break down the concepts behind Large Language Models in a straightforward way and eve...]]></description>
+            <guid isPermaLink="false">Understanding the Backend Behind LLMs(No Headaches Involved)</guid>
+            <dc:creator><![CDATA[Achal]]></dc:creator>
+            <pubDate>Tue, 20 May 2025 14:16:07 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[From Curiosity to Systems: How Linux Changed the Way I Think About Development]]></title>
+            <description><![CDATA[When I first started exploring the world of programming, I was like most beginners—curious, enthusiastic, and deeply focused on writing code that *worked*. I wasn't thinking in terms of systems or operating environments. For me, development lived inside an IDE window and ended with a "Compilation Su...]]></description>
+            <guid isPermaLink="false">From Curiosity to Systems: How Linux Changed the Way I Think About Development</guid>
+            <dc:creator><![CDATA[Achal]]></dc:creator>
+            <pubDate>Tue, 06 May 2025 05:06:38 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

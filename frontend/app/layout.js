@@ -25,6 +25,17 @@ export const metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.png",
   },
+  alternates: {
+    canonical: "https://vx6fid.vercel.app",
+    types: {
+      "application/rss+xml": [
+        {
+          url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/rss.xml`,
+          title: "vx6fid's Blog RSS Feed",
+        },
+      ],
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -38,6 +49,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.png" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS Feed for Achal's Blog"
+          href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/rss.xml`}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <Toaster position="top-right" />

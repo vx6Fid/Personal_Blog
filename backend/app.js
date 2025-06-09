@@ -27,6 +27,7 @@ app.use("/api/blogs", apiLimiter, require("./routes/blogs"));
 app.use("/api/projects", apiLimiter, require("./routes/projects"));
 app.use("/api/contact", apiLimiter, require("./routes/contact"));
 app.use("/api", apiLimiter, require("./routes/authCheck"));
+app.use("/api", require("./routes/generate-rss"));
 
 // Health check endpoint
 app.get("/", (req, res) => {

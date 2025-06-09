@@ -1,4 +1,5 @@
 const pool = require("../db");
+const generateRSS = require("../scripts/generate-rss");
 
 // Helper function for error handling
 const handleError = (res, error, context) => {
@@ -62,6 +63,14 @@ exports.createBlog = async (req, res) => {
       ) RETURNING *`,
       [title, slug, tags, content, is_featured]
     );
+
+    // Generate RSS feed after successful blog creation
+    try {
+      await generateRSS();
+      console.log('RSS feed updated successfully')
+    } catch (rssError) {
+      console.log('Failed to update RSS feed:', rssError)
+    }
 
     res.status(201).json(rows[0]);
   } catch (error) {
