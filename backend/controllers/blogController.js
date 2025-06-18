@@ -11,7 +11,7 @@ const handleError = (res, error, context) => {
 exports.getBlogs = async (req, res) => {
   try {
     const { rows } = await pool.query(
-      "SELECT id, title, content, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC"
+      "SELECT id, title, content, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC",
     );
     res.json({
       message: "Blogs fetched successfully",
@@ -22,13 +22,30 @@ exports.getBlogs = async (req, res) => {
   }
 };
 
+// Get recent blogs
+exports.getRecentBlogs = async (req, res) => {
+  try {
+    const { limit = 5 } = req.query;
+    const { rows } = await pool.query(
+      "SELECT title, slug, created_at FROM blog_posts ORDER BY created_at DESC LIMIT $1",
+      [limit],
+    );
+    res.json({
+      message: "Recent blogs fetched successfully",
+      blogs: rows,
+    });
+  } catch (error) {
+    handleError(res, error, "getRecentBlogs");
+  }
+};
+
 // Get single blog by slug
 exports.getBlogBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
     const { rows } = await pool.query(
       "SELECT * FROM blog_posts WHERE slug = $1",
-      [slug]
+      [slug],
     );
 
     if (rows.length === 0) {
@@ -55,21 +72,21 @@ exports.createBlog = async (req, res) => {
 
     const { rows } = await pool.query(
       `INSERT INTO blog_posts (
-        id, title, slug, tags, content, 
+        id, title, slug, tags, content,
         created_at, updated_at, is_featured
       ) VALUES (
-        gen_random_uuid(), $1, $2, $3, $4, 
+        gen_random_uuid(), $1, $2, $3, $4,
         NOW(), NOW(), $5
       ) RETURNING *`,
-      [title, slug, tags, content, is_featured]
+      [title, slug, tags, content, is_featured],
     );
 
     // Generate RSS feed after successful blog creation
     try {
       await generateRSS();
-      console.log('RSS feed updated successfully')
+      console.log("RSS feed updated successfully");
     } catch (rssError) {
-      console.log('Failed to update RSS feed:', rssError)
+      console.log("Failed to update RSS feed:", rssError);
     }
 
     res.status(201).json(rows[0]);
@@ -98,7 +115,7 @@ exports.updateBlog = async (req, res) => {
     // Check if blog exists
     const { rows: existingBlog } = await pool.query(
       "SELECT * FROM blog_posts WHERE id = $1",
-      [id]
+      [id],
     );
 
     if (existingBlog.length === 0) {
@@ -112,7 +129,7 @@ exports.updateBlog = async (req, res) => {
     if (slug && slug !== existingBlog[0].slug) {
       const { rows: slugCheck } = await pool.query(
         "SELECT id FROM blog_posts WHERE slug = $1 AND id != $2",
-        [slug, id]
+        [slug, id],
       );
 
       if (slugCheck.length > 0) {
@@ -153,7 +170,7 @@ exports.updateBlog = async (req, res) => {
         updatedData.is_featured,
         updatedData.read_time,
         id,
-      ]
+      ],
     );
 
     res.json({
@@ -172,7 +189,7 @@ exports.deleteBlog = async (req, res) => {
     const { id } = req.params;
     const { rowCount } = await pool.query(
       "DELETE FROM blog_posts WHERE id = $1",
-      [id]
+      [id],
     );
 
     if (rowCount === 0) {
@@ -189,7 +206,7 @@ exports.deleteBlog = async (req, res) => {
 exports.getFeaturedBlog = async (req, res) => {
   try {
     const { rows } = await pool.query(
-      "SELECT * FROM blog_posts WHERE is_featured = true ORDER BY created_at DESC LIMIT 1"
+      "SELECT * FROM blog_posts WHERE is_featured = true ORDER BY created_at DESC LIMIT 1",
     );
 
     if (rows.length === 0) {
