@@ -11,7 +11,7 @@ function BlogCards({ blog, id }) {
       key={id}
       className="group relative p-6 sm:p-8 rounded-lg border border-borders hover:border-green-900 transition-all duration-300"
     >
-      <div className="absolute -left-2 -top-2 bg-gray-800 text-accent text-xs px-2 py-1 rounded">
+      <div className="absolute -left-2 -top-2 bg-accent/10 text-accent text-xs px-2 py-1 rounded border border-accent/30 backdrop-blur-sm">
         {formatDate(blog.created_at)}
       </div>
 
@@ -26,7 +26,7 @@ function BlogCards({ blog, id }) {
           {blog.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 bg-borders text-accent rounded-md"
+              className="px-2 py-1 bg-borders/20 text-secondary rounded-md  hover:bg-accent/10 hover:text-accent transition-all"
             >
               #{tag}
             </span>
