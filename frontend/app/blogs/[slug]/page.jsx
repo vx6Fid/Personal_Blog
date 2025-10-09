@@ -2,20 +2,26 @@ import BlogClient from "@/pages/BlogClient";
 import StructuredData from "@/components/StructuredData";
 import { notFound } from "next/navigation";
 
+export const revalidate = 3600; // 1 hour
+
 async function fetchBlog(slug) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/${slug}`,
-    {
-      cache: "no-store",
-    },
   );
 
   if (!res.ok) return null;
   return res.json();
 }
 
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`);
+  const blogs = await res.json();
+  if (!blogs?.length) return [];
+  return blogs.map((blog) => ({ slug: blog.slug }));
+}
+
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } = params;
   const blog = await fetchBlog(slug);
   if (!blog) return { title: "Blog Not Found" };
 
@@ -23,7 +29,10 @@ export async function generateMetadata({ params }) {
   const imageUrl =
     blog.cover_image ||
     "https://images.alphacoders.com/591/thumb-1920-591050.jpg";
-  const description = blog.content?.substring(0, 150) + "...";
+  const description = blog.content
+    ? blog.content.substring(0, 150) + (blog.content.length > 150 ? "..." : "")
+    : "";
+
   const publishedTime = new Date(blog.created_at).toISOString();
   const modifiedTime = new Date(
     blog.updated_at || blog.created_at,
