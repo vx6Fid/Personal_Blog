@@ -42,6 +42,7 @@ function BlogCards({ blog, id }) {
 
       <Link
         href={`/blogs/${blog.slug}`}
+        prefetch={true}
         className="group inline-flex items-center text-accent text-sm font-mono relative overflow-hidden"
       >
         <span className="relative inline-block">

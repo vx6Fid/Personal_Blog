@@ -1,69 +1,95 @@
 @import "tailwindcss";
+/* globals.css */
+@import "katex/dist/katex.min.css"; /* math */
+@import "prismjs/themes/prism-tomorrow.css"; /* code highlighting (or choose a theme) */
+@plugin "@tailwindcss/typography";
+
+/* Example in global.css */
+.caption-on-image {
+    color: var(--color-secondary);
+    background: rgba(0, 0, 0, 0.4); /* optional overlay */
+    padding: 2px 4px;
+    border-radius: 3px;
+}
 
 @theme {
-  --color-background: #0a0a0a;
-  --color-primary: #e0e0e0;
-  --color-secondary: #9ca3af;
-  --color-accent: #00ffb2;
-  --color-borders: #424242;
-  --color-code: #121212;
-  --color-error: #ff5555;
-  --color-success: #32cd32;
-  --color-selection: #009973;
+    --color-background: #0a0a0a;
+    --color-primary: #e0e0e0;
+    --color-secondary: #9ca3af;
+    --color-accent: #00ffb2;
+    --color-borders: #424242;
+    --color-code: #121212;
+    --color-error: #ff5555;
+    --color-success: #32cd32;
+    --color-selection: #009973;
 }
 
 /* Light theme overrides (scoped under .light) */
 :root.light {
-  --color-background: #ffffff;
-  --color-primary: #111111;
-  --color-secondary: #4b5563;
-  --color-accent: #00cc8f;
-  --color-borders: #d1d5db;
-  --color-code: #f5f5f5;
-  --color-error: #cc0000;
-  --color-success: #228b22;
-  --color-selection: #adf1e0;
+    --color-background: #ffffff;
+    --color-primary: #111111;
+    --color-secondary: #4b5563;
+    --color-accent: #00cc8f;
+    --color-borders: #d1d5db;
+    --color-code: #f5f5f5;
+    --color-error: #cc0000;
+    --color-success: #228b22;
+    --color-selection: #adf1e0;
 }
 
 /* Body defaults */
 body {
-  background-color: var(--color-background);
-  color: var(--color-primary);
+    background-color: var(--color-background);
+    color: var(--color-primary);
 }
 
 /* Text selection color */
 ::selection {
-  background: var(--color-selection);
-  color: #000;
+    background: var(--color-selection);
+    color: #000;
 }
 
 /* Hide scrollbar but allow scrolling */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* Custom scrollbar styles */
 aside::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 aside::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
 }
 
 aside::-webkit-scrollbar-thumb {
-  background: rgba(0, 240, 168, 0.534); /* Accent color with transparency */
-  border-radius: 3px;
+    background: rgba(0, 240, 168, 0.534); /* Accent color with transparency */
+    border-radius: 3px;
 }
 
 aside::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 178, 0.5); /* More opaque on hover */
+    background: rgba(0, 255, 178, 0.5); /* More opaque on hover */
 }
 
 /* For Firefox */
 aside {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(4, 214, 151, 0.822) rgba(255, 255, 255, 0.05);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(4, 214, 151, 0.822) rgba(255, 255, 255, 0.05);
+}
+
+.prose h2 {
+    margin-top: 2.5rem; /* 40px */
+    margin-bottom: 1rem; /* 16px */
+}
+
+.prose h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose p {
+    margin-bottom: 1.25rem; /* 20px */
 }

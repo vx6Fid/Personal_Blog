@@ -2,7 +2,7 @@ import BlogClient from "@/pages/BlogClient";
 import StructuredData from "@/components/StructuredData";
 import { notFound } from "next/navigation";
 
-export const revalidate = 3600; // 1 hour
+export const revalidate = 24 * 3600; // 1 hour
 
 async function fetchBlog(slug) {
   const res = await fetch(
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const blog = await fetchBlog(slug);
   if (!blog) return { title: "Blog Not Found" };
 
@@ -80,9 +80,9 @@ export default async function Page({ params }) {
   }
 
   return (
-    <>
+    <div className="bg-background text-primary min-h-screen max-w-7xl mx-auto">
       <StructuredData blog={blog} />
       <BlogClient blog={blog} />
-    </>
+    </div>
   );
 }
