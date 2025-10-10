@@ -1,13 +1,31 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "miro.medium.com", // Medium-hosted images
-      "images.unsplash.com", // Unsplash
-      "images.alphacoders.com", // Your previous placeholder
-      "via.placeholder.com", // Generic placeholders
-      "pbs.twimg.com", // Popular for social/blog embeds
-      "iili.io",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "miro.medium.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.alphacoders.com",
+      },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+      },
+      {
+        protocol: "https",
+        hostname: "pbs.twimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "iili.io",
+      },
     ],
   },
 };

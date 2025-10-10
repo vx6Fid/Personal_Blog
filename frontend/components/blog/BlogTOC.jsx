@@ -29,7 +29,7 @@ export default function TOC({ headings, activeId, onClick, className }) {
                 ${
                   isActive
                     ? "bg-accent/10 text-accent border border-accent/10"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-accent/5"
+                    : "text-primary hover:text-secondary hover:bg-accent/10"
                 }`}
             >
               {/* Minimal indicator */}

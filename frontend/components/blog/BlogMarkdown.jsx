@@ -42,30 +42,70 @@ const components = {
     return <p className="my-6 leading-relaxed text-primary">{children}</p>;
   },
 
-  // Headings with better spacing
+  // Main title — big, clear, not harsh
   h1: ({ children, ...props }) => (
     <h1
-      className="text-2xl font-medium mt-12 mb-6 tracking-tight first:mt-0"
+      className="
+          text-4xl font-extrabold text-primary leading-tight
+          mt-16 mb-8 scroll-mt-24 tracking-tight
+          transition-colors duration-200
+        "
       {...props}
     >
       {children}
     </h1>
   ),
+
+  // Section titles — strong visual anchor with adaptive accent underline
   h2: ({ children, ...props }) => (
     <h2
-      className="text-xl font-medium mt-10 mb-4 tracking-tight border-b border-borders pb-2"
+      className="
+          relative text-2xl font-semibold text-primary leading-snug
+          mt-12 mb-6 scroll-mt-20 pb-2 tracking-tight
+          after:content-[''] after:absolute after:left-0 after:bottom-0
+          after:h-[2px] after:w-16 after:bg-accent/50
+          after:rounded-full
+          transition-all duration-400
+          hover:after:w-24
+        "
       {...props}
     >
       {children}
     </h2>
   ),
+
+  // Subsections — lighter tone, readable on both themes
   h3: ({ children, ...props }) => (
     <h3
-      className="text-lg font-normal mt-8 mb-3 tracking-tight border-b border-borders pb-2"
+      className="
+          text-xl font-medium text-primary/90 leading-snug
+          mt-10 mb-4 scroll-mt-16
+          transition-colors duration-400
+        "
       {...props}
     >
       {children}
     </h3>
+  ),
+
+  // Minor headers — soft and subtle, ideal for detail sections
+  h4: ({ children, ...props }) => (
+    <h4
+      className="
+          text-lg font-medium text-primary/80 leading-snug
+          mt-8 mb-3 scroll-mt-12
+          transition-colors duration-200
+        "
+      {...props}
+    >
+      {children}
+    </h4>
+  ),
+
+  strong: ({ children }) => (
+    <strong className="font-bold text-primary dark:text-primary">
+      {children}
+    </strong>
   ),
 
   code({ node, inline, className, children, ...props }) {
@@ -218,7 +258,7 @@ export default function BlogMarkdown({ content }) {
 
       {/* Content */}
       <div ref={contentRef} className="max-w-none">
-        <article className="prose prose-lg max-w-none">
+        <article className="text-primary prose prose-lg max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm, remarkMath, remarkDirective]}
             rehypePlugins={[rehypeRaw, rehypeKatex, rehypeSlug]}
