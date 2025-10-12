@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta
           name="google-site-verification"
-          content="-cz7XX3_cjMlEj5-Msvm6S2cErFLUAtR2Y0-d5XsCKk"
+          content="lmVnhoCq5cQFE5yOBAdC0V2Lux3gI36xY9oaCzmbXZw"
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
