@@ -12,12 +12,37 @@ async function fetchBlog(slug) {
   if (!res.ok) return null;
   return res.json();
 }
-
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`);
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`;
+  console.log("Fetching blogs from:", url);
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Fetch failed:", res.status, text.slice(0, 200));
+    return [];
+  }
+
+  const contentType = res.headers.get("content-type");
+  if (!contentType?.includes("application/json")) {
+    const text = await res.text();
+    console.error(
+      "Unexpected content type:",
+      contentType,
+      "Body:",
+      text.slice(0, 200),
+    );
+    return [];
+  }
+
   const blogs = await res.json();
-  if (!blogs?.length) return [];
-  return blogs.map((blog) => ({ slug: blog.slug }));
+  if (!Array.isArray(blogs)) {
+    console.error("Invalid blogs format:", blogs);
+    return [];
+  }
+
+  return blogs.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }) {

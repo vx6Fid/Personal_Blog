@@ -8,10 +8,10 @@ const __dirname = dirname(__filename);
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
 const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),
   {
-    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"], // <— must include your files
+    files: ["**/*.{js,jsx,ts,tsx}"],
     ignores: ["node_modules", ".next"],
-    ...compat.extends("next/core-web-vitals"),
   },
 ];
 

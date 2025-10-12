@@ -76,7 +76,7 @@ function Page() {
 
       {/* Current Status */}
       <section className="mb-16">
-        <h2 className="text-xl text-accent font-medium">What I'm Doing</h2>
+        <h2 className="text-xl text-accent font-medium">{"What I'm Doing"}</h2>
         <p className="text-xs mb-4 text-secondary mt-2">
           Updated: {new Date(about.doing_date).toLocaleDateString()}
         </p>

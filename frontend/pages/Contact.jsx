@@ -73,7 +73,7 @@ function ContactPage() {
 
         <div className="bg-code/10 p-4 rounded-lg mb-8">
           <p className="text-accent flex items-start gap-2">
-            <span className="text-secondary">$</span> Let's have a chat!
+            <span className="text-secondary">$</span> {"Let's have a chat!"}
           </p>
           <div className="mt-4 space-y-3">
             <a
@@ -120,7 +120,7 @@ function ContactPage() {
       </div>
       <div className="bg-code/10 py-4 rounded-lg">
         <p className="text-accent flex items-start gap-2">
-          <span className="text-secondary">$</span> Let's collaborate!
+          <span className="text-secondary">$</span> {"Let's collaborate!"}
         </p>
       </div>
       {/* Contact Form */}
@@ -213,7 +213,7 @@ function ContactPage() {
 
       {/* Footer Note */}
       <p className="mt-8 text-sm text-secondary">
-        // I usually reply within a day or two.
+        {"// I usually reply within a day or two."}
       </p>
     </div>
   );

@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import { useState, useEffect } from "react";
 import { ArrowRightIcon, Layers, SquareTerminal } from "lucide-react";
 import BlogCards from "@/components/BlogCards";
+import Link from "next/link";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -68,7 +69,7 @@ export default function Home() {
         </section>
         {blogs.length > 0 && (
           <div className="-mt-6 mb-10">
-            <a
+            <Link
               href="/blogs"
               className="flex gap-2 items-center text-accent font-medium transition-colors duration-200 group"
             >
@@ -77,7 +78,7 @@ export default function Home() {
                 <span className="absolute bottom-0 left-1/2 w-20 border-b border-accent transition-transform duration-300 scale-x-0 group-hover:scale-x-100 origin-center"></span>
               </span>
               <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            </Link>
           </div>
         )}
       </div>
