@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import { ChevronRight, FileText } from "lucide-react";
+import { ChevronRight, FileText, TreePalm } from "lucide-react";
 
 export default function TOC({ headings, activeId, onClick, className }) {
   return (
     <div className={`space-y-3 ${className || ""}`}>
       {/* Minimal header */}
       <div className="flex items-center gap-2 px-1">
-        <FileText className="w-4 h-4 text-accent" />
-        <span className="text-sm font-medium text-accent">Contents</span>
+        <TreePalm className="w-4 h-4 text-accent" />
+        <span className="text-base font-medium text-accent">Article Tree</span>
         <div className="ml-auto text-xs text-accent font-mono">
           {headings.length}
         </div>
@@ -19,17 +19,16 @@ export default function TOC({ headings, activeId, onClick, className }) {
       <nav className="space-y-0.5">
         {headings.map((heading, index) => {
           const isActive = activeId === heading.id;
-          const isH3 = heading.level === "h3";
 
           return (
             <button
               key={heading.id}
               onClick={() => onClick(heading.id)}
-              className={`w-full text-left group relative flex items-center gap-2 py-2 px-2 rounded-md transition-all duration-200
+              className={`w-full text-left group relative flex items-center gap-2 py-3 px-2 rounded-md transition-all duration-200
                 ${
                   isActive
-                    ? "bg-accent/10 text-accent border border-accent/10"
-                    : "text-primary hover:text-secondary hover:bg-accent/10"
+                    ? "bg-accent/10 text-accent border border-accent/10 font-medium"
+                    : "text-primary1 hover:bg-accent/10"
                 }`}
             >
               {/* Minimal indicator */}

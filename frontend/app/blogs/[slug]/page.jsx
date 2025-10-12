@@ -2,7 +2,7 @@ import BlogClient from "@/pages/BlogClient";
 import StructuredData from "@/components/StructuredData";
 import { notFound } from "next/navigation";
 
-export const revalidate = 24 * 3600; // 1 hour
+export const revalidate = 86400; // 1 hour
 
 async function fetchBlog(slug) {
   const res = await fetch(

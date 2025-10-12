@@ -4,12 +4,11 @@
 @import "prismjs/themes/prism-tomorrow.css"; /* code highlighting (or choose a theme) */
 @plugin "@tailwindcss/typography";
 
-/* Example in global.css */
-.caption-on-image {
-    color: var(--color-secondary);
-    background: rgba(0, 0, 0, 0.4); /* optional overlay */
-    padding: 2px 4px;
-    border-radius: 3px;
+.prose :where(figure, img, .next-image) {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
 }
 
 @theme {

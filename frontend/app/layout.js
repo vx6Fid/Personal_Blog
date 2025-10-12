@@ -1,4 +1,4 @@
-import { Roboto_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ThemeInit from "@/components/ThemeInit";
 
-const roboto_mono = Roboto_Mono({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   weight: ["200", "400", "500", "700"],
@@ -40,7 +40,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={roboto_mono.className}>
+    <html lang="en" className={mono.className}>
       <head>
         <meta
           name="google-site-verification"

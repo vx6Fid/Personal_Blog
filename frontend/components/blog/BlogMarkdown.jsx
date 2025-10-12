@@ -21,13 +21,13 @@ const components = {
     if (children.length === 1 && children[0].type === "img") {
       const imgProps = children[0].props;
       return (
-        <figure className="my-6 text-center bg-background p-2 rounded-lg border border-borders">
+        <figure className="my-6 bg-background rounded-lg border border-borders text-center">
           <Image
             src={imgProps.src}
             alt={imgProps.alt || ""}
             width={800}
             height={0}
-            className="w-full h-auto rounded-lg"
+            className="mx-auto w-auto max-w-[80%] md:max-w-3xl h-auto rounded-lg object-contain"
           />
 
           {imgProps.alt && (
@@ -232,7 +232,7 @@ export default function BlogMarkdown({ content }) {
 
       {/* Desktop TOC */}
       {headings.length > 0 && (
-        <aside className="hidden lg:block fixed right-8 top-24 w-64 h-[calc(100vh-96px)] overflow-y-auto">
+        <aside className="hidden lg:block fixed right-8 top-24 w-[500px] px-2 h-[calc(100vh-96px)] overflow-y-auto">
           <div className="bg-background/80 backdrop-blur-sm rounded-lg border border-borders p-4">
             <TOC
               headings={headings}

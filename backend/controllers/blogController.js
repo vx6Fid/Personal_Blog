@@ -27,7 +27,7 @@ exports.getRecentBlogs = async (req, res) => {
   try {
     const { limit = 5 } = req.query;
     const { rows } = await pool.query(
-      "SELECT title, slug, created_at FROM blog_posts ORDER BY created_at DESC LIMIT $1",
+      "SELECT title, slug, created_at, content FROM blog_posts ORDER BY created_at DESC LIMIT $1",
       [limit],
     );
     res.json({
