@@ -17,26 +17,31 @@ const socialLinks = [
     href: "mailto:tiwariachal059@gmail.com",
     icon: Mail,
     label: "tiwariachal059@gmail.com",
+    color: "hover:text-red-400",
   },
   {
     name: "GitHub",
     href: "https://github.com/vx6Fid",
     icon: Github,
+    color: "hover:text-gray-400",
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/achaltiwari/",
     icon: Linkedin,
+    color: "hover:text-blue-500",
   },
   {
     name: "Twitter",
     href: "https://x.com/vx6Fid",
     icon: Twitter,
+    color: "hover:text-sky-400",
   },
   {
     name: "Buy Me a Coffee",
     href: "https://buymeacoffee.com/vx6fid",
     icon: Coffee,
+    color: "hover:text-yellow-400",
   },
 ];
 
@@ -97,19 +102,20 @@ function ContactPage() {
         Have a question or want to work together? Drop me a message.
       </p>
 
-      {/* Social links — compact row */}
-      <div className="flex flex-wrap gap-3 mb-12">
+      {/* Social links */}
+      <div className="flex flex-col gap-2 mb-12">
         {socialLinks.map((link) => (
           <a
             key={link.name}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-2 text-sm text-secondary border border-borders rounded-lg hover:border-accent/40 hover:text-accent transition-all"
+            className={`group flex items-center justify-between px-1 py-1.5 text-sm text-secondary transition-colors ${link.color}`}
           >
-            <link.icon className="w-4 h-4" />
-            {link.name}
-            <ArrowUpRight className="w-3 h-3 opacity-50" />
+            <span className="flex items-center gap-2">
+              <link.icon className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+              {link.label || link.name}
+            </span>
           </a>
         ))}
       </div>
@@ -168,11 +174,10 @@ function ContactPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-            isSubmitting
-              ? "bg-accent/10 text-accent/50 cursor-not-allowed"
-              : "bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 hover:border-accent/50"
-          }`}
+          className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${isSubmitting
+            ? "bg-accent/10 text-accent/50 cursor-not-allowed"
+            : "bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 hover:border-accent/50"
+            }`}
         >
           <Send className="w-4 h-4" />
           {isSubmitting ? "Sending..." : "Send message"}
@@ -180,9 +185,8 @@ function ContactPage() {
 
         {submitStatus && (
           <p
-            className={`text-sm ${
-              submitStatus.success ? "text-success" : "text-error"
-            }`}
+            className={`text-sm ${submitStatus.success ? "text-success" : "text-error"
+              }`}
           >
             {submitStatus.message}
           </p>

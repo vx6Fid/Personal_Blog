@@ -31,7 +31,7 @@ async function getBlogs() {
       return [];
     }
 
-    const res = await fetch(`${url}/blogs`, { cache: "no-store" });
+    const res = await fetch(`${url}/blogs`);
     if (!res.ok) {
       console.error("[getBlogs] fetch failed:", res.status);
       return [];

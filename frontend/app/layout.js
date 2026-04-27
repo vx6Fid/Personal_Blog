@@ -2,6 +2,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Terminal from "@/components/terminal/Terminal";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <main className="flex-grow pt-16">{children}</main>
           <Footer />
+          <Terminal />
         </ThemeInit>
       </body>
     </html>

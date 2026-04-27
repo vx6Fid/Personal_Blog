@@ -103,3 +103,13 @@ aside {
 .animate-scan {
     animation: scan 1.5s ease-in-out infinite;
 }
+
+/* Terminal button fade-in */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out 1s both;
+}
