@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Terminal, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 function FeaturedBlogCard({ blog }) {
   const formatDate = (dateString) => {
@@ -8,69 +8,76 @@ function FeaturedBlogCard({ blog }) {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  return (
-    <article className="group relative p-8 rounded-xl bg-gradient-to-br from-green-950 to-accent/10 transition-all duration-300 shadow-lg font-mono">
-      {/* Terminal-style corner elements */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-accent/50 rounded-tl-lg" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-accent/50 rounded-tr-lg" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-accent/50 rounded-br-lg" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-accent/50 rounded-bl-lg" />
+  const text = blog.excerpt || blog.content || "";
+  const excerpt = text.length > 250 ? `${text.substring(0, 250)}...` : text;
 
-      {/* Featured Badge - Terminal Style */}
-      <div className="absolute -top-3 -right-3 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center">
-        <Terminal className="w-3 h-3 mr-1" />
+  return (
+    <article
+      className="group relative p-8 rounded-sm border border-accent/30
+        bg-accent/[0.03] transition-all duration-300
+        hover:border-accent/50 hover:shadow-[0_0_30px_-8px_rgba(0,255,178,0.15)]"
+    >
+      {/* Corner accents — all four corners for featured */}
+      <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-accent/50" />
+      <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-accent/50" />
+      <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-accent/50" />
+      <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-accent/50" />
+
+      {/* Featured badge */}
+      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 mb-4 text-xs font-mono rounded-sm border border-accent/40 text-accent bg-accent/10">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
         FEATURED
       </div>
 
-      {/* Date - Terminal Prompt Style */}
-      <div className="absolute -left-2 -top-2 bg-gray-800 text-accent text-xs px-2 py-1 rounded shadow flex items-center">
-        <span className="text-green-400 mr-1">$</span>
-        {formatDate(blog.created_at)}
+      {/* Meta */}
+      <div className="flex items-center gap-2 mb-3 text-xs text-secondary font-mono">
+        <span className="text-accent/60">▸</span>
+        <time dateTime={blog.created_at}>{formatDate(blog.created_at)}</time>
+        {blog.read_time && (
+          <>
+            <span className="text-borders">·</span>
+            <span>{blog.read_time} min</span>
+          </>
+        )}
       </div>
 
-      {/* Content */}
-      <div className="space-y-4">
-        <Link href={`/blogs/${blog.slug}`} className="block">
-          <h2 className="text-xl sm:text-2xl font-bold text-primary group-hover:text-accent transition-colors">
-            <span className="text-accent">$</span> {blog.title}
-          </h2>
-        </Link>
+      {/* Title */}
+      <Link href={`/blogs/${blog.slug}`} className="block mb-3">
+        <h2 className="text-xl sm:text-2xl font-bold text-primary group-hover:text-accent transition-colors duration-200 leading-tight">
+          <span className="text-accent/50 mr-1">$</span>
+          {blog.title}
+        </h2>
+      </Link>
 
-        {blog.tags?.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {blog.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-borders/20 text-accent rounded-full text-sm font-medium shadow-sm font-mono"
-              >
-                #{tag.toLowerCase()}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <p className="text-secondary text-lg leading-relaxed">
-          <span className="text-accent">{">>"}</span>{" "}
-          {blog.content.length > 250
-            ? `${blog.content.substring(0, 250)}...`
-            : blog.content}
-        </p>
-
-        <div className="flex justify-between items-center">
-          <Link
-            href={`/blogs/${blog.slug}`}
-            className="inline-flex items-center text-accent font-medium hover:underline group"
-          >
-            <span className="bg-accent/10 group-hover:bg-accent/20 px-3 py-1 rounded-md transition-colors">
-              cat {blog.slug}.md
+      {/* Tags */}
+      {blog.tags?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          {blog.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-0.5 text-xs font-mono rounded-sm border border-accent/20 text-accent/70"
+            >
+              #{tag.toLowerCase()}
             </span>
-            <ChevronRight className="ml-2 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
-          
-          <span className="text-sm text-secondary font-mono">
-            approx. {Math.ceil(blog.content.length / 200)} min read
-          </span>
+          ))}
         </div>
+      )}
+
+      {/* Excerpt */}
+      <p className="text-secondary leading-relaxed mb-5">{excerpt}</p>
+
+      {/* CTA */}
+      <div className="flex justify-between items-center">
+        <Link
+          href={`/blogs/${blog.slug}`}
+          className="inline-flex items-center gap-1 text-accent text-sm font-mono group/link"
+        >
+          <span className="relative">
+            cat {blog.slug}.md
+            <span className="absolute left-0 -bottom-px w-0 h-px bg-accent transition-all duration-300 group-hover/link:w-full" />
+          </span>
+          <ChevronRight className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transition-opacity duration-200" />
+        </Link>
       </div>
     </article>
   );

@@ -1,3 +1,5 @@
+import ContactClient from "@/components/ContactClient";
+
 export const metadata = {
   title: "Contact | vx6Fid",
   description:
@@ -12,10 +14,6 @@ export const metadata = {
     type: "website",
   },
 };
-
-import dynamic from "next/dynamic";
-
-const ContactClient = dynamic(() => import("@/pages/Contact"));
 
 export default function ContactPage() {
   return <ContactClient />;

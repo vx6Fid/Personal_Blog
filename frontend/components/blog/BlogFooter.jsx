@@ -39,7 +39,7 @@ const BlogFooter = () => {
   };
 
   return (
-    <div className="max-w-4xl mr-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:mr-[520px] py-12">
       <div className="border-t border-borders pt-8 flex justify-between items-center">
         <button
           onClick={() => router.back()}

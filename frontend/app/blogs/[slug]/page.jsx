@@ -1,48 +1,38 @@
-import BlogClient from "@/pages/BlogClient";
+import BlogClient from "@/components/BlogClient";
 import StructuredData from "@/components/StructuredData";
 import { notFound } from "next/navigation";
 
-export const revalidate = 86400; // 1 hour
+export const revalidate = 86400; // 24 hours
 
 async function fetchBlog(slug) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/${slug}`,
+    { next: { revalidate: 86400 } },
   );
 
   if (!res.ok) return null;
   return res.json();
 }
+
 export async function generateStaticParams() {
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`;
-  console.log("Fetching blogs from:", url);
+  try {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs`;
+    const res = await fetch(url);
 
-  const res = await fetch(url);
+    if (!res.ok) return [];
 
-  if (!res.ok) {
-    const text = await res.text();
-    console.error("Fetch failed:", res.status, text.slice(0, 200));
+    const contentType = res.headers.get("content-type");
+    if (!contentType?.includes("application/json")) return [];
+
+    const data = await res.json();
+    // API returns { blogs: [...] }, not a raw array
+    const blogs = data.blogs || data;
+    if (!Array.isArray(blogs)) return [];
+
+    return blogs.map((b) => ({ slug: b.slug }));
+  } catch {
     return [];
   }
-
-  const contentType = res.headers.get("content-type");
-  if (!contentType?.includes("application/json")) {
-    const text = await res.text();
-    console.error(
-      "Unexpected content type:",
-      contentType,
-      "Body:",
-      text.slice(0, 200),
-    );
-    return [];
-  }
-
-  const blogs = await res.json();
-  if (!Array.isArray(blogs)) {
-    console.error("Invalid blogs format:", blogs);
-    return [];
-  }
-
-  return blogs.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }) {

@@ -6,6 +6,14 @@ import Link from "next/link";
 import { Menu, X, Moon, SunMedium } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
 function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,53 +23,31 @@ function Navbar() {
   useEffect(() => {
     const stored = localStorage.getItem("theme");
     const prefersLight = window.matchMedia(
-      "(prefers-color-scheme: light)"
+      "(prefers-color-scheme: light)",
     ).matches;
-    const initial = stored || (prefersLight ? "light" : "dark");
-    setTheme(initial);
+    setTheme(stored || (prefersLight ? "light" : "dark"));
   }, []);
 
   useEffect(() => {
-    if (theme === "light") {
-      document.documentElement.classList.add("light");
-    } else {
-      document.documentElement.classList.remove("light");
-    }
+    document.documentElement.classList.toggle("light", theme === "light");
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  useEffect(() => setMenuOpen(false), [pathname]);
 
-  2;
-
-  // Close menu on route change
   useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  // Add scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/projects", label: "Projects" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ];
 
   return (
     <motion.nav
-      className={`fixed w-full z-50 border-b transition-colors ${
-        scrolled ? "bg-background backdrop-blur-sm" : "bg-background"
-      } border-borders`}
+      className={`fixed w-full z-50 border-b border-borders/60 backdrop-blur-md transition-all duration-300 ${
+        scrolled
+          ? "bg-background/90 shadow-[0_1px_12px_-4px_rgba(0,0,0,0.3)]"
+          : "bg-background/70"
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
@@ -76,36 +62,37 @@ function Navbar() {
             vx6Fid
           </Link>
 
-          {/* Right section: theme toggle + mobile menu */}
           <div className="flex items-center space-x-4">
-            {/* Theme Toggle Button (always visible) */}
             <button
-              onClick={toggleTheme}
-              className="text-primary hover:text-accent transition-colors"
+              onClick={() =>
+                setTheme((p) => (p === "dark" ? "light" : "dark"))
+              }
+              className="text-primary hover:text-accent transition-colors p-1"
               aria-label="Toggle Theme"
             >
-              {theme === "dark" ? <SunMedium size={20} /> : <Moon size={20} />}
+              {theme === "dark" ? (
+                <SunMedium size={20} />
+              ) : (
+                <Moon size={20} />
+              )}
             </button>
 
-            {/* Desktop Nav */}
+            {/* Desktop */}
             <ul className="hidden md:flex items-center space-x-8 ml-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`
-              relative px-1 py-2 text-lg font-medium
-              hover:text-accent transition-colors
-              ${pathname === link.href ? "text-accent" : "text-primary"}
-              after:absolute after:bottom-0 after:left-0 
-              after:h-[2px] after:bg-accent after:rounded-full
-              after:transition-all after:duration-300
-              ${
-                pathname === link.href
-                  ? "after:w-full"
-                  : "after:w-0 hover:after:w-full"
-              }
-            `}
+                    className={`relative px-1 py-2 text-lg font-medium transition-colors duration-200
+                      hover:text-accent
+                      after:absolute after:bottom-0 after:left-0
+                      after:h-0.5 after:bg-accent after:rounded-full
+                      after:transition-all after:duration-300
+                      ${
+                        pathname === link.href
+                          ? "text-accent after:w-full"
+                          : "text-primary after:w-0 hover:after:w-full"
+                      }`}
                     aria-current={pathname === link.href ? "page" : undefined}
                   >
                     {link.label}
@@ -114,9 +101,9 @@ function Navbar() {
               ))}
             </ul>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile toggle */}
             <button
-              className="md:hidden p-2 rounded-md text-primary hover:bg-borders/20 transition-colors"
+              className="md:hidden p-2 rounded-sm text-primary hover:bg-borders/20 transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -126,11 +113,11 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.ul
-              className="md:hidden flex flex-col space-y-2 pb-4"
+              className="md:hidden flex flex-col space-y-1 pb-4"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -145,14 +132,12 @@ function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`
-                      block px-3 py-2 rounded-md text-base font-medium
+                    className={`block px-3 py-2 rounded-sm text-base font-medium transition-colors
                       ${
                         pathname === link.href
                           ? "bg-accent/10 text-accent"
                           : "text-primary hover:bg-borders/10"
-                      }
-                    `}
+                      }`}
                   >
                     {link.label}
                   </Link>

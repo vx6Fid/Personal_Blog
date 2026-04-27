@@ -80,6 +80,7 @@ export default function HeroSection() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
+    let animationId;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -159,12 +160,15 @@ export default function HeroSection() {
         }
       });
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     animate();
 
-    return () => window.removeEventListener("resize", resizeCanvas);
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resizeCanvas);
+    };
   }, []);
 
   return (

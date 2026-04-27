@@ -28,12 +28,12 @@
     --color-background: #ffffff;
     --color-primary: #111111;
     --color-secondary: #4b5563;
-    --color-accent: #00cc8f;
+    --color-accent: #059669;
     --color-borders: #d1d5db;
-    --color-code: #f5f5f5;
-    --color-error: #cc0000;
-    --color-success: #228b22;
-    --color-selection: #adf1e0;
+    --color-code: #f3f4f6;
+    --color-error: #dc2626;
+    --color-success: #16a34a;
+    --color-selection: #a7f3d0;
 }
 
 /* Body defaults */
@@ -50,8 +50,8 @@ body {
 
 /* Hide scrollbar but allow scrolling */
 .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* Custom scrollbar styles */
@@ -61,27 +61,27 @@ aside::-webkit-scrollbar {
 
 aside::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 aside::-webkit-scrollbar-thumb {
-    background: rgba(0, 240, 168, 0.534); /* Accent color with transparency */
-    border-radius: 3px;
+    background: rgba(0, 240, 168, 0.3);
+    border-radius: 2px;
 }
 
 aside::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 255, 178, 0.5); /* More opaque on hover */
+    background: rgba(0, 255, 178, 0.5);
 }
 
-/* For Firefox */
 aside {
     scrollbar-width: thin;
-    scrollbar-color: rgba(4, 214, 151, 0.822) rgba(255, 255, 255, 0.05);
+    scrollbar-color: rgba(4, 214, 151, 0.3) rgba(255, 255, 255, 0.05);
 }
 
+/* Prose spacing */
 .prose h2 {
-    margin-top: 2.5rem; /* 40px */
-    margin-bottom: 1rem; /* 16px */
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .prose h3 {
@@ -90,5 +90,16 @@ aside {
 }
 
 .prose p {
-    margin-bottom: 1.25rem; /* 20px */
+    margin-bottom: 1.25rem;
+}
+
+/* Scanning loader animation */
+@keyframes scan {
+    0% { top: 0; opacity: 1; }
+    50% { top: calc(100% - 2px); opacity: 0.6; }
+    100% { top: 0; opacity: 1; }
+}
+
+.animate-scan {
+    animation: scan 1.5s ease-in-out infinite;
 }
