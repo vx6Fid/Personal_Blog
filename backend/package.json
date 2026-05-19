@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.10.1",
     "pg": "^8.15.6",
+    "postgres": "^3.4.9",
     "rss": "^1.2.2"
   },
   "devDependencies": {

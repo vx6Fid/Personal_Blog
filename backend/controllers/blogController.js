@@ -7,11 +7,12 @@ const handleError = (res, error, context) => {
   res.status(500).json({ message: "Server Error" });
 };
 
-// Get all blogs
+// Get all blogs (summary — no full content)
 exports.getBlogs = async (req, res) => {
   try {
     const { rows } = await pool.query(
-      "SELECT id, title, content, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC",
+      `SELECT id, title, LEFT(content, 300) AS excerpt, slug, tags, created_at, is_featured, read_time 
+       FROM blog_posts ORDER BY created_at DESC`,
     );
     res.json({
       message: "Blogs fetched successfully",
@@ -22,12 +23,27 @@ exports.getBlogs = async (req, res) => {
   }
 };
 
-// Get recent blogs
+// Get all blogs with full content (for admin/search)
+exports.getBlogsFull = async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, title, content, slug, tags, created_at, is_featured, read_time FROM blog_posts ORDER BY created_at DESC",
+    );
+    res.json({
+      message: "Blogs fetched successfully",
+      blogs: rows,
+    });
+  } catch (error) {
+    handleError(res, error, "getBlogsFull");
+  }
+};
+
+// Get recent blogs (summary only)
 exports.getRecentBlogs = async (req, res) => {
   try {
     const { limit = 5 } = req.query;
     const { rows } = await pool.query(
-      "SELECT title, slug, created_at, content FROM blog_posts ORDER BY created_at DESC LIMIT $1",
+      "SELECT title, slug, created_at, tags, LEFT(content, 300) AS excerpt FROM blog_posts ORDER BY created_at DESC LIMIT $1",
       [limit],
     );
     res.json({
