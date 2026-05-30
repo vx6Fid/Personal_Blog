@@ -3,64 +3,58 @@ const RSS = require("rss");
 const Feed = RSS.default || RSS;
 const fs = require("fs");
 const path = require("path");
+const pool = require("../db");
 
 async function generateRSS() {
   const siteUrl = "https://vx6fid.vercel.app";
-  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-  if (!apiUrl) {
-    throw new Error("API base URL is not defined");
-  }
 
   try {
-    const res = await fetch(`${apiUrl}/blogs`);
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    const { blogs } = await res.json();
+    // Fetch directly from DB to get full content (not the truncated API response)
+    const { rows: blogs } = await pool.query(
+      "SELECT title, slug, content, created_at FROM blog_posts ORDER BY created_at DESC LIMIT 20",
+    );
 
     const feed = new Feed({
-      title: "vx6fid's Blog",
-      description: "Where systems break, code laughs, and caffeine fuels the chaos.",
+      title: "vx6Fid's Blog",
+      description:
+        "Systems, code, and engineering insights from vx6Fid.",
       id: siteUrl,
       link: siteUrl,
       language: "en",
       favicon: `${siteUrl}/favicon.ico`,
-      updated: new Date(),
+      updated: blogs.length > 0 ? new Date(blogs[0].created_at) : new Date(),
       feedLinks: {
         rss2: `${siteUrl}/rss.xml`,
       },
-      author: "Achal",
+      author: "Achal Nath Tiwari",
     });
 
     blogs.forEach((blog) => {
       const plainText =
-        blog.content
-          .replace(/(<([^>]+)>)/gi, "")
+        (blog.content || "")
+          .replace(/[#*`>\[\]()!_~]/g, "")
           .slice(0, 300)
           .trim() + "...";
 
       feed.item({
         title: blog.title,
-        id: `${siteUrl}/blog/${blog.slug}`,
-        link: `${siteUrl}/blog/${blog.slug}`,
+        id: `${siteUrl}/blogs/${blog.slug}`,
+        link: `${siteUrl}/blogs/${blog.slug}`,
         description: plainText,
-        content: blog.content || "",
         date: new Date(blog.created_at),
       });
     });
 
-    // Write to frontend's public folder
     const outputPath = path.join(__dirname, "../public/rss.xml");
-    
-    // Make sure the directory exists
     const dir = path.dirname(outputPath);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    
+
     fs.writeFileSync(outputPath, feed.xml({ indent: true }));
-    console.log("-- :) -- RSS feed generated at frontend/public/rss.xml");
+    console.log("RSS feed generated successfully");
   } catch (err) {
-    console.error("-- :| -- Failed to generate RSS feed:", err.message);
+    console.error("Failed to generate RSS feed:", err.message);
     throw err;
   }
 }

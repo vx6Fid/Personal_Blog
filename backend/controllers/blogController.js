@@ -194,6 +194,9 @@ exports.updateBlog = async (req, res) => {
       message: "Blog post updated successfully",
       data: rows[0],
     });
+
+    // Regenerate RSS feed
+    generateRSS().catch((e) => console.error("RSS update failed:", e.message));
   } catch (error) {
     handleError(res, error, "updateBlog");
   }
@@ -213,6 +216,9 @@ exports.deleteBlog = async (req, res) => {
     }
 
     res.json({ message: "Blog deleted successfully" });
+
+    // Regenerate RSS feed
+    generateRSS().catch((e) => console.error("RSS update failed:", e.message));
   } catch (error) {
     handleError(res, error, "deleteBlog");
   }
