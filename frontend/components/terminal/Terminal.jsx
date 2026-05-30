@@ -223,7 +223,12 @@ export default function Terminal() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-background/40 backdrop-blur-sm p-4">
+    <div
+      className="fixed inset-0 z-50 flex bg-background/40 backdrop-blur-sm p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site terminal"
+    >
       <div
         className="w-full h-full flex flex-col font-mono border border-borders/50 bg-background/90"
         onClick={() => inputRef.current?.focus()}
