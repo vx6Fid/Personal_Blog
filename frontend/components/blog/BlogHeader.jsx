@@ -3,17 +3,17 @@ import BlogActions from "./BlogActions";
 
 export default function BlogHeader({ blog }) {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:mr-110 pt-8">
+    <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-8">
       {/* Action bar */}
       <BlogActions />
 
       {/* Title + meta */}
       <div className="space-y-4 mt-6">
-        <h1 className="text-3xl tracking-tight leading-snug font-bold text-primary">
+        <h1 className="text-3xl tracking-tight leading-snug font-bold text-primary font-display">
           {blog.title}
         </h1>
 
-        <div className="flex items-center gap-3 text-sm text-secondary font-mono">
+        <div className="flex items-center gap-3 text-sm text-secondary font-mono uppercase tracking-wider">
           <span className="flex items-center gap-1.5">
             <Calendar className="w-4 h-4" />
             {new Date(blog.created_at).toLocaleDateString("en-US", {
@@ -34,7 +34,7 @@ export default function BlogHeader({ blog }) {
             {blog.tags.map((tag) => (
               <span
                 key={tag.toLowerCase()}
-                className="px-2 py-0.5 rounded-sm text-xs font-mono border border-borders/40 text-secondary
+                className="px-2 py-0.5 rounded-sm text-xs font-mono border border-borders/40 text-secondary uppercase tracking-wide
                   hover:border-accent/30 hover:text-accent transition-all duration-200"
               >
                 #{tag}

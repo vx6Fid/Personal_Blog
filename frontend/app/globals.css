@@ -1,8 +1,15 @@
 @import "tailwindcss";
-/* globals.css */
-@import "katex/dist/katex.min.css"; /* math */
-@import "prismjs/themes/prism-tomorrow.css"; /* code highlighting (or choose a theme) */
+@import "katex/dist/katex.min.css";
 @plugin "@tailwindcss/typography";
+
+/* Departure Mono — headings, UI, terminal */
+@font-face {
+    font-family: "Departure Mono";
+    src: url("/fonts/DepartureMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 
 .prose :where(figure, img, .next-image) {
     margin-left: auto;
@@ -12,70 +19,77 @@
 }
 
 @theme {
-    --color-background: #0a0a0a;
-    --color-primary: #e0e0e0;
-    --color-secondary: #9ca3af;
-    --color-accent: #00ffb2;
-    --color-borders: #424242;
-    --color-code: #121212;
-    --color-error: #ff5555;
-    --color-success: #32cd32;
-    --color-selection: #009973;
+    --color-background: #151515;
+    --color-primary: #e8e4df;
+    --color-secondary: #7a7570;
+    --color-accent: #e5a54b;
+    --color-borders: #2a2725;
+    --color-code: #1a1816;
+    --color-error: #e05252;
+    --color-success: #5cb85c;
+    --color-selection: rgba(229, 165, 75, 0.2);
+    --color-glow: rgba(229, 165, 75, 0.12);
+    --font-display: "Departure Mono", monospace;
 }
 
-/* Light theme overrides (scoped under .light) */
+/* Light theme */
 :root.light {
-    --color-background: #ffffff;
-    --color-primary: #111111;
-    --color-secondary: #4b5563;
-    --color-accent: #059669;
-    --color-borders: #d1d5db;
-    --color-code: #f3f4f6;
-    --color-error: #dc2626;
-    --color-success: #16a34a;
-    --color-selection: #a7f3d0;
+    --color-background: #faf8f5;
+    --color-primary: #1a1816;
+    --color-secondary: #6b6560;
+    --color-accent: #c4872e;
+    --color-borders: #e0dbd5;
+    --color-code: #f0ece7;
+    --color-error: #c43030;
+    --color-success: #3d8b3d;
+    --color-selection: rgba(196, 135, 46, 0.15);
+    --color-glow: rgba(180, 120, 30, 0.25);
 }
 
-/* Body defaults */
 body {
     background-color: var(--color-background);
     color: var(--color-primary);
+    transition: background-color 0.3s ease, color 0.2s ease;
 }
 
-/* Text selection color */
+/* Ensure all interactive elements show pointer cursor */
+button,
+[role="button"],
+a,
+summary,
+[tabindex]:not([tabindex="-1"]) {
+    cursor: pointer;
+}
+
 ::selection {
     background: var(--color-selection);
-    color: #000;
+    color: inherit;
 }
 
-/* Hide scrollbar but allow scrolling */
+/* Scrollbar */
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/* Custom scrollbar styles */
 aside::-webkit-scrollbar {
     width: 6px;
 }
 
 aside::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent;
     border-radius: 2px;
 }
 
 aside::-webkit-scrollbar-thumb {
-    background: rgba(0, 240, 168, 0.3);
+    background: var(--color-accent);
+    opacity: 0.3;
     border-radius: 2px;
-}
-
-aside::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 255, 178, 0.5);
 }
 
 aside {
     scrollbar-width: thin;
-    scrollbar-color: rgba(4, 214, 151, 0.3) rgba(255, 255, 255, 0.05);
+    scrollbar-color: var(--color-accent) transparent;
 }
 
 /* Prose spacing */
@@ -91,6 +105,39 @@ aside {
 
 .prose p {
     margin-bottom: 1.25rem;
+    line-height: 1.75;
+}
+
+/* Kill default prose code/pre styling */
+.prose pre {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.prose code {
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+}
+
+.prose pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+/* Remove background highlights from syntax highlighter spans */
+.prose pre code span,
+.prose pre div span {
+    background: transparent !important;
+}
+
+/* Display font utility */
+.font-display {
+    font-family: var(--font-display);
 }
 
 /* Scanning loader animation */
@@ -112,4 +159,17 @@ aside {
 
 .animate-fade-in {
     animation: fade-in 0.5s ease-out 1s both;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .animate-scan,
+    .animate-fade-in,
+    .animate-pulse {
+        animation: none;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
+    }
 }

@@ -11,7 +11,6 @@ const navLinks = [
   { href: "/blogs", label: "Blogs" },
   { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
 function Navbar() {
@@ -51,12 +50,13 @@ function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
+      aria-label="Main navigation"
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link
             href="/"
-            className="text-accent text-xl font-bold hover:opacity-80 transition-opacity"
+            className="font-display text-accent text-xl font-bold hover:opacity-80 transition-opacity"
             aria-label="Home"
           >
             vx6Fid
@@ -68,7 +68,7 @@ function Navbar() {
                 setTheme((p) => (p === "dark" ? "light" : "dark"))
               }
               className="text-primary hover:text-accent transition-colors p-1"
-              aria-label="Toggle Theme"
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             >
               {theme === "dark" ? (
                 <SunMedium size={20} />
@@ -83,7 +83,7 @@ function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`relative px-1 py-2 text-lg font-medium transition-colors duration-200
+                    className={`relative px-1 py-2 text-lg font-medium font-display transition-colors duration-200
                       hover:text-accent
                       after:absolute after:bottom-0 after:left-0
                       after:h-0.5 after:bg-accent after:rounded-full

@@ -73,12 +73,24 @@ export default function HeroSection() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const resizeCanvas = () => {
       canvas.width = sectionRef.current.clientWidth;
       canvas.height = sectionRef.current.clientHeight;
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+
+    // Theme-aware line color
+    const getLineColor = (opacity) => {
+      const isLight = document.documentElement.classList.contains("light");
+      return isLight
+        ? `rgba(160, 100, 20, ${opacity})`
+        : `rgba(229, 165, 75, ${opacity})`;
+    };
 
     let animationId;
     const animate = () => {
@@ -129,7 +141,7 @@ export default function HeroSection() {
           ctx.lineTo(mouse.current.x, mouse.current.y);
           const fade =
             (1 - distMouse / CURSOR_DISTANCE) * (0.7 + Math.random() * 0.3);
-          ctx.strokeStyle = `rgba(0,255,178,${fade})`;
+          ctx.strokeStyle = getLineColor(fade);
           ctx.stroke();
         }
 
@@ -152,7 +164,7 @@ export default function HeroSection() {
                 const fade =
                   (1 - dist / NODE_CONNECTION_DISTANCE) *
                   (0.5 + Math.random() * 0.5);
-                ctx.strokeStyle = `rgba(0,255,178,${fade})`;
+                ctx.strokeStyle = getLineColor(fade);
                 ctx.stroke();
               }
             });
@@ -184,7 +196,7 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center gap-8 px-6">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-primary tracking-tight">
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-primary tracking-tight">
           vx6Fid
         </h1>
 
