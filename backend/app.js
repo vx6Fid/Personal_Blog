@@ -25,7 +25,6 @@ app.use(express.json());
 app.use("/api/admin", apiLimiter, require("./routes/admin"));
 app.use("/api/blogs", apiLimiter, require("./routes/blogs"));
 app.use("/api/projects", apiLimiter, require("./routes/projects"));
-app.use("/api/contact", apiLimiter, require("./routes/contact"));
 app.use("/api", apiLimiter, require("./routes/authCheck"));
 app.use("/api", require("./routes/generate-rss"));
 
