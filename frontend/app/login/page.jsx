@@ -172,7 +172,7 @@ export default function LoginPage() {
                 className={`w-full flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-all duration-200 ${
                   isLoading
                     ? "bg-accent/20 text-accent/70 cursor-not-allowed"
-                    : "bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 hover:border-accent/50 shadow-[0_0_15px_-3px_rgba(0,255,178,0.1)] hover:shadow-[0_0_20px_-3px_rgba(0,255,178,0.2)]"
+                    : "bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 hover:border-accent/50 shadow-[0_0_15px_-3px_rgba(229,165,75,0.1)] hover:shadow-[0_0_20px_-3px_rgba(229,165,75,0.2)]"
                 }`}
               >
                 {isLoading ? (

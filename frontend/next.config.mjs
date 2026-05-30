@@ -28,6 +28,30 @@ const nextConfig = {
       },
     ],
   },
+
+  // Block admin pages in production
+  async redirects() {
+    if (process.env.NODE_ENV === "production") {
+      return [
+        {
+          source: "/admin/:path*",
+          destination: "/not-found",
+          permanent: false,
+        },
+        {
+          source: "/admin",
+          destination: "/not-found",
+          permanent: false,
+        },
+        {
+          source: "/login",
+          destination: "/not-found",
+          permanent: false,
+        },
+      ];
+    }
+    return [];
+  },
 };
 
 export default nextConfig;
