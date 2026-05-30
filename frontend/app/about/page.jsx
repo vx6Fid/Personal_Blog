@@ -44,7 +44,7 @@ export default async function AboutPage() {
     <div className="px-4 sm:px-8 max-w-3xl mx-auto py-12">
       {/* Header */}
       <div className="flex items-center gap-4 mb-6">
-        <h1 className="text-2xl text-accent font-medium">About</h1>
+        <h1 className="text-2xl text-accent font-medium font-display">About</h1>
       </div>
 
       {/* About Text — render desktop version for SSR, CSS hides on mobile */}
@@ -79,7 +79,7 @@ export default async function AboutPage() {
 
       {/* Current Status */}
       <section className="mb-16">
-        <h2 className="text-xl text-accent font-medium">{"What I'm Doing"}</h2>
+        <h2 className="text-xl text-accent font-medium font-display">{"What I'm Doing"}</h2>
         <p className="text-xs mb-4 text-secondary mt-2">
           Updated: {new Date(about.doing_date).toLocaleDateString()}
         </p>
@@ -92,7 +92,7 @@ export default async function AboutPage() {
 
       {/* Tools */}
       <section className="mb-16">
-        <h2 className="text-xl text-accent font-medium mb-4">Tools</h2>
+        <h2 className="text-xl text-accent font-medium font-display mb-4">Tools</h2>
 
         <div className="space-y-8">
           <div>
@@ -124,10 +124,34 @@ export default async function AboutPage() {
       </section>
 
       {/* Extras */}
-      <section className="mb-6">
-        <h2 className="text-xl font-medium text-accent mb-4">Beyond</h2>
+      <section className="mb-16">
+        <h2 className="text-xl font-medium text-accent font-display mb-4">Beyond</h2>
         <p className="wrap-break-word">{about.extras}</p>
-        <br />
+      </section>
+
+      {/* Connect */}
+      <section className="mb-6">
+        <h2 className="text-xl font-medium text-accent font-display mb-4">Connect</h2>
+        <div className="flex flex-wrap gap-3">
+          {[
+            { name: "Email", href: "mailto:tiwariachal059@gmail.com" },
+            { name: "GitHub", href: "https://github.com/vx6Fid" },
+            { name: "LinkedIn", href: "https://www.linkedin.com/in/achaltiwari/" },
+            { name: "Twitter", href: "https://x.com/vx6Fid" },
+            { name: "Buy Me a Coffee", href: "https://buymeacoffee.com/vx6fid" },
+          ].map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              target={link.href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-sm border border-borders rounded-sm text-secondary
+                hover:border-accent/40 hover:text-accent transition-all duration-200"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
       </section>
     </div>
   );

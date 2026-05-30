@@ -16,7 +16,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "vx6Fid’s Thoughts — A Blog on Systems & Beyond",
+  title: "vx6Fid's Thoughts — A Blog on Systems & Beyond",
   description:
     "Reflections on code, systems, and everything in between. Exploring the world of backend engineering, tech tools, and my learning journey through diverse topics.",
   icons: {
@@ -41,7 +41,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={mono.className}>
+    <html lang="en" className={`${mono.variable} ${mono.className}`}>
       <head>
         <meta
           name="google-site-verification"
@@ -50,7 +50,6 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        {/* <link rel="canonical" href="https://vx6fid.vercel.app" /> */}
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -64,7 +63,7 @@ export default function RootLayout({ children }) {
           <Analytics />
           <SpeedInsights />
           <Navbar />
-          <main className="flex-grow pt-16">{children}</main>
+          <main className="grow pt-16">{children}</main>
           <Footer />
           <Terminal />
         </ThemeInit>

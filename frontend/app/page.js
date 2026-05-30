@@ -52,7 +52,7 @@ export default async function Page() {
         <section className="mt-12 sm:mt-16 pb-6 sm:pb-16">
           <div className="flex items-center gap-3 mb-10 sm:mb-12">
             <Layers className="w-5 h-5 text-accent" />
-            <h1 className="text-2xl sm:text-3xl font-bold text-primary">
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary font-display uppercase tracking-wide">
               recent_posts.md
             </h1>
           </div>

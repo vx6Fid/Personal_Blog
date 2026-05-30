@@ -59,7 +59,7 @@ export default function BlogSearch({ blogs }) {
 
       {/* All Posts */}
       <div className="space-y-6">
-        <h2 className="font-medium text-primary">
+        <h2 className="font-medium text-primary font-display uppercase tracking-wide">
           All Posts ({filteredBlogs.length})
         </h2>
 

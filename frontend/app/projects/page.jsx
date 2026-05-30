@@ -44,7 +44,7 @@ export default async function Page() {
   return (
     <div className="p-4 sm:p-6 max-w-6xl mb-8 mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-medium text-primary mb-2">
+        <h1 className="text-2xl sm:text-3xl font-medium text-primary font-display uppercase tracking-wide mb-2">
           Projects
         </h1>
         <p className="text-secondary">
